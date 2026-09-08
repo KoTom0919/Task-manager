@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#dce7f7"
+  >
+
+  <title>タスク管理</title>
+
+  <link
+    rel="stylesheet"
+    href="style.css?v=20260908-2"
+  >
+</head>
+
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>タスク管理</h1>
+    </header>
+
+    <main class="main">
+      <!-- タスク入力画面 -->
+      <section
+        class="screen active"
+        id="inputScreen"
+      >
+        <form
+          class="task-form"
+          id="taskForm"
+        >
+          <h2 class="form-title">
+            タスクを追加する
+          </h2>
+
+          <label class="main-field">
+            <span>タスク名</span>
+
+            <input
+              id="taskName"
+              type="text"
+              maxlength="60"
+              autocomplete="off"
+              required
+            >
+          </label>
+
+          <div class="schedule-grid">
+            <!-- 開始時刻 -->
+            <fieldset class="schedule-box">
+              <legend>
+                開始時刻
+                <small>任意</small>
+              </legend>
+
+              <label>
+                <span>日付</span>
+
+                <input
+                  id="startDate"
+                  type="date"
+                >
+              </label>
+
+              <label>
+                <span>時刻</span>
+
+                <input
+                  id="startTime"
+                  type="text"
+                  inputmode="numeric"
+                  placeholder="09:30"
+                  maxlength="5"
+                  autocomplete="off"
+                >
+              </label>
+            </fieldset>
+
+            <!-- 締め切り時刻 -->
+            <fieldset class="schedule-box">
+              <legend>
+                締め切り時刻
+              </legend>
+
+              <label>
+                <span>日付</span>
+
+                <input
+                  id="deadlineDate"
+                  type="date"
+                  required
+                >
+              </label>
+
+              <label>
+                <span>時刻</span>
+
+                <input
+                  id="deadlineTime"
+                  type="text"
+                  inputmode="numeric"
+                  placeholder="18:00"
+                  maxlength="5"
+                  autocomplete="off"
+                  required
+                >
+              </label>
+            </fieldset>
+          </div>
+
+          <label class="main-field memo-field">
+            <span>メモ</span>
+
+            <textarea
+              id="taskMemo"
+              maxlength="300"
+            ></textarea>
+          </label>
+
+          <!-- 表示色 -->
+          <fieldset class="color-box">
+            <legend>表示色</legend>
+
+            <div
+              class="color-options"
+              id="colorOptions"
+            ></div>
+          </fieldset>
+
+          <div class="form-actions">
+            <button
+              type="button"
+              class="cancel-button"
+              id="cancelButton"
+            >
+              キャンセル
+            </button>
+
+            <button
+              type="submit"
+              class="register-button"
+            >
+              追加
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- 時系列画面 -->
+      <section
+        class="screen timeline-screen"
+        id="timelineScreen"
+      >
+        <label class="single-date">
+          <span class="visually-hidden">
+            表示日
+          </span>
+
+          <input
+            id="timelineDate"
+            type="date"
+          >
+        </label>
+
+        <div class="timeline-layout">
+          <div class="timeline-board">
+            <div
+              class="timeline-axis hidden"
+              id="timelineAxis"
+              aria-hidden="true"
+            ></div>
+
+            <div
+              class="timeline-items"
+              id="timelineItems"
+            ></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 一覧画面 -->
+      <section
+        class="screen list-screen"
+        id="listScreen"
+      >
+        <div class="list-scroll">
+          <!-- 表示期間 -->
+          <div class="period-picker">
+            <label>
+              <span class="visually-hidden">
+                開始日
+              </span>
+
+              <input
+                id="listStartDate"
+                type="date"
+              >
+            </label>
+
+            <span
+              class="wave"
+              aria-hidden="true"
+            >
+              〜
+            </span>
+
+            <label>
+              <span class="visually-hidden">
+                終了日
+              </span>
+
+              <input
+                id="listEndDate"
+                type="date"
+              >
+            </label>
+          </div>
+
+          <p
+            class="period-error"
+            id="periodError"
+            role="alert"
+          ></p>
+
+          <h2>完了済みタスク</h2>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>タスク名</th>
+                  <th>完了時刻</th>
+                  <th>メモ</th>
+                </tr>
+              </thead>
+
+              <tbody id="completedTable"></tbody>
+            </table>
+          </div>
+
+          <h2>未完了のタスク</h2>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>タスク名</th>
+                  <th>開始時刻</th>
+                  <th>締め切り時刻</th>
+                  <th>メモ</th>
+                </tr>
+              </thead>
+
+              <tbody id="pendingTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 下部メニュー -->
+    <nav
+      class="bottom-nav"
+      aria-label="画面切り替え"
+    >
+      <button
+        type="button"
+        class="nav-input active"
+        data-screen="inputScreen"
+      >
+        タスク入力
+      </button>
+
+      <button
+        type="button"
+        class="nav-timeline"
+        data-screen="timelineScreen"
+      >
+        時系列でみる
+      </button>
+
+      <button
+        type="button"
+        class="nav-list"
+        data-screen="listScreen"
+      >
+        一覧で見る
+      </button>
+    </nav>
+  </div>
+
+  <!-- 予定確認画面 -->
+  <dialog id="taskDialog">
+    <div class="dialog-content">
+      <h2>予定確認</h2>
+
+      <dl>
+        <div>
+          <dt>タスク名</dt>
+          <dd id="dialogName"></dd>
+        </div>
+
+        <div>
+          <dt id="dialogTimeTitle">
+            時刻
+          </dt>
+
+          <dd id="dialogTime"></dd>
+        </div>
+
+        <div>
+          <dt>メモ</dt>
+          <dd id="dialogMemo"></dd>
+        </div>
+      </dl>
+
+      <div class="dialog-actions">
+        <button
+          type="button"
+          class="back-button"
+          id="dialogBack"
+        >
+          戻る
+        </button>
+
+        <button
+          type="button"
+          class="confirm-button"
+          id="dialogConfirm"
+        >
+          完了
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <div
+    class="toast"
+    id="toast"
+    role="status"
+    aria-live="polite"
+  ></div>
+
+  <script src="script.js?v=20260908-2"></script>
+</body>
+</html>
