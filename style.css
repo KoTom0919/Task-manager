@@ -146,3 +146,53 @@ dialog::backdrop { background: rgb(0 0 0 / .45); }
   .dialog-content { padding: 28px 18px 0; }
   .dialog-actions { margin: 28px -18px 0; }
 }
+/* スマホ版のレイアウト調整 */
+@media (max-width: 650px) {
+  /* 開始時刻・締め切り時刻の入力欄 */
+  .schedule-box {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .schedule-box label {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .schedule-box input {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    height: 44px;
+    font-size: 0.9rem;
+  }
+
+  /* 時系列の日付を中央寄せ */
+  .single-date {
+    width: 74%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  /* 時系列のタスク一覧を中央寄せ */
+  .timeline-layout {
+    width: 100%;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .timeline-board {
+    width: calc(100% - 38px);
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  /* 一覧画面の日付欄を少し小さく */
+  .period-picker {
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
