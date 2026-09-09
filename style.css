@@ -16,7 +16,7 @@ body { color: #050505; background: #fff; font-family: "Yu Gothic", "Hiragino Kak
 button, input, textarea { font: inherit; }
 button { cursor: pointer; color: inherit; }
 .app { min-height: 100dvh; padding-bottom: 78px; }
-.header { height: 126px; display: grid; place-items: center; background: var(--header-blue); border: 1px solid var(--line); }
+.header { height: 126px; display: grid; place-items: center; background: var(--header-green); border: 1px solid var(--line); }
 .header h1 { margin: 0; color: #477dc9; font-size: clamp(2.7rem, 8vw, 4.2rem); font-weight: 400; letter-spacing: .13em; text-shadow: 0 3px 3px #bbb; }
 .main { min-height: calc(100dvh - 204px); }
 .screen { display: none; }
@@ -232,6 +232,62 @@ dialog::backdrop { background: rgb(0 0 0 / .45); }
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
+    box-sizing: border-box;
+  }
+}@media (max-width: 650px) {
+
+  /* ===== 時系列でみる ===== */
+  .single-date {
+    width: 74%;
+    max-width: 74%;
+    min-width: 0;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+  }
+
+  .single-date input,
+  .single-date input[type="date"] {
+    display: block;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    inline-size: 100% !important;
+    min-inline-size: 0 !important;
+    max-inline-size: 100% !important;
+    box-sizing: border-box;
+  }
+
+
+  /* ===== 一覧で表示 ===== */
+  .period-picker {
+    width: 90%;
+    max-width: 90%;
+    min-width: 0;
+    margin-left: auto;
+    margin-right: auto;
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      auto
+      minmax(0, 1fr);
+  }
+
+  .period-picker label {
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .period-picker input,
+  .period-picker input[type="date"] {
+    display: block;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    inline-size: 100% !important;
+    min-inline-size: 0 !important;
+    max-inline-size: 100% !important;
     box-sizing: border-box;
   }
 }
