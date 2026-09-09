@@ -146,86 +146,92 @@ dialog::backdrop { background: rgb(0 0 0 / .45); }
   .dialog-content { padding: 28px 18px 0; }
   .dialog-actions { margin: 28px -18px 0; }
 }
-/* スマホ版のレイアウト調整 */
+/* ===== スマホ版 最終調整 ===== */
 @media (max-width: 650px) {
-  /* 開始時刻・締め切り時刻の入力欄 */
+
+  /* 開始時刻・締め切り時刻 */
+  .schedule-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 16px;
+    width: 100%;
+  }
+
   .schedule-box {
     width: 100%;
     min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .schedule-box label {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
     width: 100%;
     min-width: 0;
+    max-width: 100%;
   }
 
   .schedule-box input {
     display: block;
-    width: 100%;
-    min-width: 0;
-    max-width: none;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
     height: 44px;
+    box-sizing: border-box;
     font-size: 0.9rem;
+  }
+
+  .schedule-box input[type="date"] {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    -webkit-appearance: none;
+    appearance: none;
   }
 
   /* 時系列の日付を中央寄せ */
   .single-date {
     width: 74%;
-    margin-right: auto;
     margin-left: auto;
+    margin-right: auto;
   }
 
   /* 時系列のタスク一覧を中央寄せ */
   .timeline-layout {
     width: 100%;
     padding-left: 0;
-    margin-right: auto;
     margin-left: auto;
+    margin-right: auto;
   }
 
   .timeline-board {
     width: calc(100% - 38px);
-    margin-right: auto;
     margin-left: auto;
+    margin-right: auto;
   }
 
-  /* 一覧画面の日付欄を少し小さく */
+  /* 一覧画面の日付 */
   .period-picker {
     width: 90%;
-    margin-right: auto;
-    margin-left: auto;
-  }
-}
-@media (max-width: 650px) {
-  .schedule-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-  }
-
-  .schedule-box,
-  .schedule-box label,
-  .period-picker label {
-    min-width: 0;
-  }
-
-  .schedule-box input,
-  .schedule-box input[type="date"],
-  .single-date input[type="date"],
-  .period-picker input[type="date"] {
-    display: block;
-    width: 100% !important;
-    inline-size: 100% !important;
-    min-width: 0 !important;
-    min-inline-size: 0 !important;
-    max-width: 100% !important;
-    max-inline-size: 100% !important;
-    box-sizing: border-box;
-  }
-
-  .period-picker {
     grid-template-columns:
       minmax(0, 1fr)
       auto
       minmax(0, 1fr);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .period-picker label {
+    min-width: 0;
+  }
+
+  .period-picker input[type="date"],
+  .single-date input[type="date"] {
+    display: block;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
   }
 }
