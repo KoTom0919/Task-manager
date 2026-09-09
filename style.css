@@ -443,4 +443,45 @@ dialog::backdrop { background: rgb(0 0 0 / .45); }
     text-align: center;
     text-align-last: center;
   }
+}/* ===== スマホ版 一覧表を横スクロール ===== */
+@media (max-width: 650px) {
+
+  /* 一覧画面そのものは横にはみ出させない */
+  .list-screen {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .list-scroll {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* 完了済み・未完了タスクの表だけ横スクロール */
+  .table-wrap {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto !important;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* 表は一定の横幅を確保 */
+  .table-wrap table {
+    width: 680px;
+    min-width: 680px;
+    max-width: none;
+    table-layout: fixed;
+  }
+
+  .table-wrap th,
+  .table-wrap td {
+    padding-left: 10px;
+    padding-right: 10px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
 }
