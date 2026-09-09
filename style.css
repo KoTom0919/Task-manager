@@ -196,3 +196,36 @@ dialog::backdrop { background: rgb(0 0 0 / .45); }
     margin-left: auto;
   }
 }
+@media (max-width: 650px) {
+  .schedule-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .schedule-box,
+  .schedule-box label,
+  .period-picker label {
+    min-width: 0;
+  }
+
+  .schedule-box input,
+  .schedule-box input[type="date"],
+  .single-date input[type="date"],
+  .period-picker input[type="date"] {
+    display: block;
+    width: 100% !important;
+    inline-size: 100% !important;
+    min-width: 0 !important;
+    min-inline-size: 0 !important;
+    max-width: 100% !important;
+    max-inline-size: 100% !important;
+    box-sizing: border-box;
+  }
+
+  .period-picker {
+    grid-template-columns:
+      minmax(0, 1fr)
+      auto
+      minmax(0, 1fr);
+  }
+}
