@@ -291,3 +291,76 @@ dialog::backdrop { background: rgb(0 0 0 / .45); }
     box-sizing: border-box;
   }
 }
+/* ===== スマホ版 一覧画面の横幅修正 ===== */
+@media (max-width: 650px) {
+
+  /* 一覧画面全体 */
+  .list-screen {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 3%;
+    padding-right: 3%;
+    overflow-x: hidden;
+  }
+
+  .list-scroll {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* 日付選択 */
+  .period-picker {
+    width: 90%;
+    max-width: 90%;
+    min-width: 0;
+    margin-left: auto;
+    margin-right: auto;
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      auto
+      minmax(0, 1fr);
+  }
+
+  .period-picker label {
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .period-picker input,
+  .period-picker input[type="date"] {
+    display: block;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    inline-size: 100% !important;
+    min-inline-size: 0 !important;
+    max-inline-size: 100% !important;
+    box-sizing: border-box;
+  }
+
+  /* 完了済み・未完了の表 */
+  .table-wrap {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .table-wrap table {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    table-layout: fixed;
+  }
+
+  .table-wrap th,
+  .table-wrap td {
+    min-width: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+}
